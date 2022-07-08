@@ -1,4 +1,5 @@
-﻿using FirstAspNetMvc_project.Models;
+﻿using FirstAspNetMvc_project.Data;
+using FirstAspNetMvc_project.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -9,17 +10,17 @@ namespace FirstAspNetMvc_project.Controllers
 {
     public class UserController : Controller
     {
-        private List<User> users = new List<User>();
-        public UserController()
+        //private CompanyDbContext context = new CompanyDbContext();
+        private readonly CompanyDbContext context;
+
+        public UserController(CompanyDbContext context)
         {
-            users.Add(new User() { Name = "Vlad", Surname = "Tymo", Email = "rejv434@gmail.com", BirthDate = DateTime.Now });
-            users.Add(new User() { Name = "Bob", Surname = "Bobovich", Email = "super4344@gmail.com", BirthDate = DateTime.Now });
-            users.Add(new User() { Name = "Igor", Surname = "Rufer", Email = "hgkkkkff@gmail.com", BirthDate = DateTime.Now });
+            this.context = context;
         }
 
         public IActionResult Index()
         {
-            return View(users);
+            return View(context.Users.ToList());
         }
     }
 }

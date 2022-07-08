@@ -1,4 +1,5 @@
-﻿using FirstAspNetMvc_project.Models;
+﻿using FirstAspNetMvc_project.Data;
+using FirstAspNetMvc_project.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
