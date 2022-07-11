@@ -17,10 +17,31 @@ namespace FirstAspNetMvc_project.Controllers
         {
             this.context = context;
         }
-
+        
+        [HttpGet]
         public IActionResult Index()
         {
             return View(context.Users.ToList());
+        }
+
+        [HttpGet]
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create(User newUser)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(nameof(Create));
+            }
+
+            context.Users.Add(newUser);
+            await context.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Index));
         }
     }
 }

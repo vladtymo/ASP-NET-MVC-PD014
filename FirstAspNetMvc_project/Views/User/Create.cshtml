@@ -1,0 +1,46 @@
+﻿@model User;
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create New</h1>
+
+<h4>User</h4>
+<hr />
+
+<form method="post" asp-action="Create">
+    <div class="row">
+        <div class="col-12 col-md-6 form-group">
+            <label asp-for="Name">Name</label>
+            <input asp-for="Name" type="text" class="form-control" placeholder="Enter name">
+            <span asp-validation-for="Name" class="form-text text-danger"></span>
+        </div>
+        <div class="col-12 col-md-6 form-group">
+            <label asp-for="Surname">Surname</label>
+            <input asp-for="Surname" type="text" class="form-control" placeholder="Enter surname">
+            <span asp-validation-for="Surname" class="form-text text-danger"></span>
+        </div>
+        <div class="col-12 col-md-6 form-group">
+            <label asp-for="Email">Email</label>
+            <input asp-for="Email" type="email" class="form-control" aria-describedby="emailHelp" placeholder="Enter email">
+            <span asp-validation-for="Email" class="form-text text-danger"></span>
+        </div>
+        <div class="col-12 col-md-6 form-group">
+            <label asp-for="BirthDate">Birthdate</label>
+            <input asp-for="BirthDate" type="date" class="form-control">
+            <span asp-validation-for="BirthDate" class="form-text text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <input type="submit" value="Create" class="btn btn-primary" />
+    </div>
+</form>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
