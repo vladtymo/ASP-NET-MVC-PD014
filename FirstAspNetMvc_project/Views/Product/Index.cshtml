@@ -1,23 +1,16 @@
-﻿@model List<Data.Entities.User>;
+﻿@model List<Data.Entities.Product>;
 
-<h1 class="mb-4">User List</h1>
+<h1 class="mb-4">Product List</h1>
 
-<a asp-controller="User" asp-action="Create" class="mb-3 btn btn-primary text-white">Create New User</a>    
-
-@*<ul class="list-group">
-    @foreach (var user in @Model)
-    {
-        <li class="list-group-item">@user.Name @user.Surname</li>
-    }
-</ul>*@
+<a asp-controller="Product" asp-action="Create" class="mb-3 btn btn-primary text-white">Create New Product</a>
 
 <table class="table table-hover">
     <thead>
         <tr>
             <th scope="col">Name</th>
-            <th scope="col">Surname</th>
-            <th scope="col">Email</th>
-            <th scope="col">Birthdate</th>
+            <th scope="col">Description</th>
+            <th scope="col">Price</th>
+            <th scope="col">Rating</th>
             <th scope="col"></th>
         </tr>
     </thead>
@@ -26,9 +19,9 @@
         {
             <tr>
                 <td>@user.Name</td>
-                <td>@user.Surname</td>
-                <td>@user.Email</td>
-                <td>@user.BirthDate.ToShortDateString()</td>
+                <td>@user.Description</td>
+                <td>@user.Price&nbsp;$</td>
+                <td>@user.Rating</td>
                 <td>
                     <div class="btn-group" role="group" aria-label="Basic example">
                         <a asp-action="Edit" asp-route-id="@user.Id" class="btn btn-outline-info p-1 px-3">Edit</a>

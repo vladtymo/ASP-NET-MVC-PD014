@@ -1,0 +1,48 @@
+﻿@model Data.Entities.Product;
+@{
+    ViewData["Title"] = "Create";
+    bool isCreate = Model == null;
+}
+
+<h1>@(isCreate ? "Create New" : "Update Information")</h1>
+
+<h4>Product</h4>
+<hr />
+
+<form method="post" asp-action="@(isCreate ? "Create" : "Edit")">
+    @*<input asp-for="Id" hidden />*@
+    <div class="row">
+        <div class="col-12 col-md-6 form-group">
+            <label asp-for="Name">Name</label>
+            <input asp-for="Name" type="text" class="form-control" placeholder="Enter name">
+            <span asp-validation-for="Name" class="form-text text-danger"></span>
+        </div>
+        <div class="col-12 col-md-6 form-group">
+            <label asp-for="Price">Price</label>    
+            <input asp-for="Price" type="number" min="0" class="form-control" aria-describedby="emailHelp" placeholder="Enter price">
+            <span asp-validation-for="Price" class="form-text text-danger"></span>
+        </div>
+        <div class="col-12 col-md-6 form-group">
+            <label asp-for="Rating">Rating</label>
+            <input asp-for="Rating" type="number" min="1" max="10" step="0.1" class="form-control">
+            <span asp-validation-for="Rating" class="form-text text-danger"></span>
+        </div>
+        <div class="col-12 col-md-6 form-group">
+            <label asp-for="Description">Description</label>
+            <textarea asp-for="Description" class="form-control" rows="7" placeholder="Enter description"></textarea>
+            <span asp-validation-for="Description" class="form-text text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <input type="submit" value="@(isCreate ? "Create" : "Update")" class="btn btn-primary" />
+    </div>
+</form>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,6 +1,5 @@
 ﻿using Data;
 using Data.Entities;
-using FirstAspNetMvc_project.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -10,37 +9,36 @@ using System.Threading.Tasks;
 
 namespace FirstAspNetMvc_project.Controllers
 {
-    public class UserController : Controller
+    public class ProductController : Controller
     {
-        //private CompanyDbContext context = new CompanyDbContext();
         private readonly CompanyDbContext context;
 
-        public UserController(CompanyDbContext context)
+        public ProductController(CompanyDbContext context)
         {
             this.context = context;
         }
-        
+
         [HttpGet]
         public IActionResult Index()
         {
-            return View(context.Users.ToList());
+            return View(context.Products.ToList());
         }
 
         [HttpGet]
         public IActionResult Create()
         {
-            return View();
+            return View("Upsert");
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(User newUser)
+        public async Task<IActionResult> Create(Product newProduct)
         {
             if (!ModelState.IsValid)
             {
-                return View(nameof(Create));
+                return View("Upsert");
             }
 
-            context.Users.Add(newUser);
+            context.Products.Add(newProduct);
             await context.SaveChangesAsync();
 
             return RedirectToAction(nameof(Index));
@@ -50,41 +48,40 @@ namespace FirstAspNetMvc_project.Controllers
         {
             if (id < 0) return NotFound();
 
-            var user = await context.Users.FindAsync(id);
+            var product = await context.Products.FindAsync(id);
 
-            if (user == null) return NotFound();
+            if (product == null) return NotFound();
 
-            return View(user);
+            return View("Upsert", product);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(User updatedUser)
+        public async Task<IActionResult> Edit(Product updatedProduct)
         {
             if (!ModelState.IsValid)
             {
-                return View(updatedUser);
+                return View("Upsert", updatedProduct);
             }
 
-            var user = context.Users.AsNoTracking().FirstOrDefaultAsync(u => u.Id == updatedUser.Id);
-            //var user = await context.Users.FindAsync(updatedUser.Id);
+            //var product = context.Products.AsNoTracking().FirstOrDefaultAsync(u => u.Id == updatedProduct.Id);
 
-            if (user == null) return NotFound();
+            //if (product == null) return NotFound();
 
-            context.Users.Update(updatedUser);
+            context.Products.Update(updatedProduct);
             await context.SaveChangesAsync();
 
             return RedirectToAction(nameof(Index));
         }
 
-        public async Task<IActionResult> Delete(int? id) 
+        public async Task<IActionResult> Delete(int? id)
         {
             if (id < 0) return NotFound();
 
-            var user = await context.Users.FindAsync(id);
+            var product = await context.Products.FindAsync(id);
 
-            if (user == null) return NotFound();
+            if (product == null) return NotFound();
 
-            context.Users.Remove(user);
+            context.Products.Remove(product);
             await context.SaveChangesAsync();
 
             return RedirectToAction(nameof(Index));
