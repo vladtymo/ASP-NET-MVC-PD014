@@ -1,11 +1,16 @@
-﻿@model Data.Entities.User;
+﻿@using FirstAspNetMvc_project.Utilities;
+@model Data.Entities.User;
 @{
-    ViewData["Title"] = "Create";
+    string avatarPath = WebConstants.userAvatarsPath;
+    avatarPath += Model.Avatar != null ? Model.Avatar : "no-profile-picture.webp";
 }
 
 <h1>Update Information</h1>
 
 <h4>User</h4>
+<div class="text-center mb-3">
+    <img class="rounded" height="120" src="@avatarPath" alt="User Avatar" />
+</div>
 <hr />
 
 <form method="post" asp-action="Edit">

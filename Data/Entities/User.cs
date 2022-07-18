@@ -20,5 +20,7 @@ namespace Data.Entities
         public string Email { get; set; }
 
         public DateTime BirthDate { get; set; }
+
+        public string Avatar { get; set; }
     }
 }
