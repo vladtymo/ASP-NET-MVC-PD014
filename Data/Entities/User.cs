@@ -22,5 +22,8 @@ namespace Data.Entities
         public DateTime BirthDate { get; set; }
 
         public string Avatar { get; set; }
+
+        public int? RoleId { get; set; }
+        public Role Role { get; set; }
     }
 }

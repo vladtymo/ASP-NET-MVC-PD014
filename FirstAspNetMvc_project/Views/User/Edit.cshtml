@@ -1,8 +1,8 @@
 ﻿@using FirstAspNetMvc_project.Utilities;
-@model Data.Entities.User;
+@model FirstAspNetMvc_project.Models.EditUserViewModel;
 @{
     string avatarPath = WebConstants.userAvatarsPath;
-    avatarPath += Model.Avatar != null ? Model.Avatar : "no-profile-picture.webp";
+    avatarPath += Model.User.Avatar != null ? Model.User.Avatar : "no-profile-picture.webp";
 }
 
 <h1>Update Information</h1>
@@ -15,25 +15,32 @@
 
 <form method="post" asp-action="Edit">
     <div class="row">
+        <input asp-for="User.Id" hidden>
         <div class="col-12 col-md-6 form-group">
-            <label asp-for="Name">Name</label>
-            <input asp-for="Name" type="text" class="form-control" placeholder="Enter name">
-            <span asp-validation-for="Name" class="form-text text-danger"></span>
+            <label asp-for="User.Name">Name</label>
+            <input asp-for="User.Name" type="text" class="form-control" placeholder="Enter name">
+            <span asp-validation-for="User.Name" class="form-text text-danger"></span>
         </div>
         <div class="col-12 col-md-6 form-group">
-            <label asp-for="Surname">Surname</label>
-            <input asp-for="Surname" type="text" class="form-control" placeholder="Enter surname">
-            <span asp-validation-for="Surname" class="form-text text-danger"></span>
+            <label asp-for="User.Surname">Surname</label>
+            <input asp-for="User.Surname" type="text" class="form-control" placeholder="Enter surname">
+            <span asp-validation-for="User.Surname" class="form-text text-danger"></span>
         </div>
         <div class="col-12 col-md-6 form-group">
-            <label asp-for="Email">Email</label>
-            <input asp-for="Email" type="email" class="form-control" aria-describedby="emailHelp" placeholder="Enter email">
-            <span asp-validation-for="Email" class="form-text text-danger"></span>
+            <label asp-for="User.Email">Email</label>
+            <input asp-for="User.Email" type="email" class="form-control" aria-describedby="emailHelp" placeholder="Enter email">
+            <span asp-validation-for="User.Email" class="form-text text-danger"></span>
         </div>
         <div class="col-12 col-md-6 form-group">
-            <label asp-for="BirthDate">Birthdate</label>
-            <input asp-for="BirthDate" type="date" class="form-control">
-            <span asp-validation-for="BirthDate" class="form-text text-danger"></span>
+            <label asp-for="User.BirthDate">Birthdate</label>
+            <input asp-for="User.BirthDate" type="date" class="form-control">
+            <span asp-validation-for="User.BirthDate" class="form-text text-danger"></span>
+        </div>
+        <div class="col-12 form-group">
+            <label asp-for="User.RoleId">Role</label>
+            <select asp-for="User.RoleId" asp-items="@Model.Roles" class="form-control">
+                <option>--Without Role--</option>
+            </select>
         </div>
     </div>
 

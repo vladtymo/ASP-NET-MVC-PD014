@@ -25,6 +25,13 @@ namespace Data
             base.OnModelCreating(modelBuilder);
 
             // Initialize
+            modelBuilder.Entity<Role>().HasData(
+                new Role() { Id = 1, Name = "User"},
+                new Role() { Id = 2, Name = "Manager" },
+                new Role() { Id = 3, Name = "Administrator" },
+                new Role() { Id = 4, Name = "Moderator" }
+            );
+
             modelBuilder.Entity<User>().HasData(
                 new User() 
                 { 
@@ -32,7 +39,8 @@ namespace Data
                     Name = "Vlad", 
                     Surname = "Tymo", 
                     Email = "rejv434@gmail.com", 
-                    BirthDate = DateTime.Now 
+                    BirthDate = DateTime.Now,
+                    RoleId = 2
                 },
                 new User() { Id = 2, Name = "Bob", Surname = "Bobovich", Email = "super4344@gmail.com", BirthDate = DateTime.Now },
                 new User() { Id = 3, Name = "Igor", Surname = "Rufer", Email = "hgkkkkff@gmail.com", BirthDate = DateTime.Now }
@@ -68,5 +76,6 @@ namespace Data
 
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Product> Products { get; set; }
+        public virtual DbSet<Role> Roles { get; set; }
     }
 }

@@ -4,14 +4,16 @@ using Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Data.Migrations
 {
     [DbContext(typeof(CompanyDbContext))]
-    partial class CompanyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220720121859_AddUserRole")]
+    partial class AddUserRole
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -87,28 +89,6 @@ namespace Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Roles");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "User"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Name = "Moderator"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = "Manager"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Name = "Administrator"
-                        });
                 });
 
             modelBuilder.Entity("Data.Entities.User", b =>
@@ -150,16 +130,15 @@ namespace Data.Migrations
                         new
                         {
                             Id = 1,
-                            BirthDate = new DateTime(2022, 7, 20, 15, 21, 39, 21, DateTimeKind.Local).AddTicks(9075),
+                            BirthDate = new DateTime(2022, 7, 20, 15, 18, 59, 50, DateTimeKind.Local).AddTicks(7815),
                             Email = "rejv434@gmail.com",
                             Name = "Vlad",
-                            RoleId = 2,
                             Surname = "Tymo"
                         },
                         new
                         {
                             Id = 2,
-                            BirthDate = new DateTime(2022, 7, 20, 15, 21, 39, 24, DateTimeKind.Local).AddTicks(3195),
+                            BirthDate = new DateTime(2022, 7, 20, 15, 18, 59, 54, DateTimeKind.Local).AddTicks(3336),
                             Email = "super4344@gmail.com",
                             Name = "Bob",
                             Surname = "Bobovich"
@@ -167,7 +146,7 @@ namespace Data.Migrations
                         new
                         {
                             Id = 3,
-                            BirthDate = new DateTime(2022, 7, 20, 15, 21, 39, 24, DateTimeKind.Local).AddTicks(3235),
+                            BirthDate = new DateTime(2022, 7, 20, 15, 18, 59, 54, DateTimeKind.Local).AddTicks(3399),
                             Email = "hgkkkkff@gmail.com",
                             Name = "Igor",
                             Surname = "Rufer"

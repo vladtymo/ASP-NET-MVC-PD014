@@ -5,6 +5,7 @@ using FirstAspNetMvc_project.Utilities;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -35,15 +36,21 @@ namespace FirstAspNetMvc_project.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            return View();
+            var roles = new SelectList(context.Roles.ToList(), nameof(Role.Id), nameof(Role.Name));
+            var viewModel = new CreateUserViewModel()
+            {
+                Roles = roles
+            };
+
+            return View(viewModel);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(User newUser)
+        public async Task<IActionResult> Create(CreateUserViewModel data)
         {
             if (!ModelState.IsValid)
             {
-                return View(nameof(Create));
+                return View(data);
             }
 
             if (HttpContext.Request.Form.Files.Any())
@@ -52,10 +59,10 @@ namespace FirstAspNetMvc_project.Controllers
 
                 string avatarPath = SaveFile(avatar);
 
-                newUser.Avatar = avatarPath;
+                data.User.Avatar = avatarPath;
             }
 
-            context.Users.Add(newUser);
+            context.Users.Add(data.User);
             await context.SaveChangesAsync();
 
             return RedirectToAction(nameof(Index));
@@ -69,30 +76,37 @@ namespace FirstAspNetMvc_project.Controllers
 
             if (user == null) return NotFound();
 
-            return View(user);
+            var roles = new SelectList(context.Roles.ToList(), nameof(Role.Id), nameof(Role.Name));
+            var viewModel = new EditUserViewModel()
+            {
+                Roles = roles,
+                User = user
+            };
+
+            return View(viewModel);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(User updatedUser)
+        public IActionResult Edit(EditUserViewModel data)
         {
             if (!ModelState.IsValid)
             {
-                return View(updatedUser);
+                return View(data);
             }
 
-            var user = context.Users.AsNoTracking().FirstOrDefaultAsync(u => u.Id == updatedUser.Id);
+            var user = context.Users.AsNoTracking().FirstOrDefault(u => u.Id == data.User.Id);
             //var user = await context.Users.FindAsync(updatedUser.Id);
 
             if (user == null) return NotFound();
 
-            context.Users.Update(updatedUser);
-            await context.SaveChangesAsync();
+            context.Users.Update(data.User);
+            context.SaveChanges();
 
             return RedirectToAction(nameof(Index));
         }
 
         public async Task<IActionResult> Delete(int? id) 
-        {
+        {   
             if (id < 0) return NotFound();
 
             var user = await context.Users.FindAsync(id);
@@ -117,7 +131,7 @@ namespace FirstAspNetMvc_project.Controllers
             string fileName = name + extension;
 
             // root + folder + name + extension
-            string path = Path.Combine(root, folder, fileName);
+            string path = root + folder + fileName;
 
             using (var fs = new FileStream(path, FileMode.Create))
             {
