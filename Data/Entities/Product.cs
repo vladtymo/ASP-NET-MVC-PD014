@@ -21,5 +21,8 @@ namespace Data.Entities
 
         //[Range(1, 10)]
         public float Rating { get; set; }
+
+        public int CategoryId { get; set; }
+        public Category Category { get; set; }
     }
 }

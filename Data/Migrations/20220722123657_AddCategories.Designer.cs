@@ -4,14 +4,16 @@ using Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Data.Migrations
 {
     [DbContext(typeof(CompanyDbContext))]
-    partial class CompanyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220722123657_AddCategories")]
+    partial class AddCategories
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -141,7 +143,6 @@ namespace Data.Migrations
                         {
                             Id = 4,
                             CategoryId = 1,
-                            Description = "A T-shirt, or tee, is a style of fabric shirt named after the T shape of its body and sleeves.",
                             Name = "T-Shirt Nike",
                             Price = 80m,
                             Rating = 8f
@@ -226,7 +227,7 @@ namespace Data.Migrations
                         new
                         {
                             Id = 1,
-                            BirthDate = new DateTime(2022, 7, 22, 15, 39, 11, 369, DateTimeKind.Local).AddTicks(7687),
+                            BirthDate = new DateTime(2022, 7, 22, 15, 36, 56, 975, DateTimeKind.Local).AddTicks(9315),
                             Email = "rejv434@gmail.com",
                             Name = "Vlad",
                             RoleId = 3,
@@ -235,7 +236,7 @@ namespace Data.Migrations
                         new
                         {
                             Id = 2,
-                            BirthDate = new DateTime(2022, 7, 22, 15, 39, 11, 372, DateTimeKind.Local).AddTicks(1834),
+                            BirthDate = new DateTime(2022, 7, 22, 15, 36, 56, 978, DateTimeKind.Local).AddTicks(6318),
                             Email = "super4344@gmail.com",
                             Name = "Bob",
                             Surname = "Bobovich"
@@ -243,7 +244,7 @@ namespace Data.Migrations
                         new
                         {
                             Id = 3,
-                            BirthDate = new DateTime(2022, 7, 22, 15, 39, 11, 372, DateTimeKind.Local).AddTicks(1874),
+                            BirthDate = new DateTime(2022, 7, 22, 15, 36, 56, 978, DateTimeKind.Local).AddTicks(6352),
                             Email = "hgkkkkff@gmail.com",
                             Name = "Igor",
                             Surname = "Rufer"

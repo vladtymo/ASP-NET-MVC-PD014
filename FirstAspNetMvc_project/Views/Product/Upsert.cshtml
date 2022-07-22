@@ -18,7 +18,7 @@
             <span asp-validation-for="Name" class="form-text text-danger"></span>
         </div>
         <div class="col-12 col-md-6 form-group">
-            <label asp-for="Price">Price</label>    
+            <label asp-for="Price">Price</label>
             <input asp-for="Price" type="number" min="0" class="form-control" aria-describedby="emailHelp" placeholder="Enter price">
             <span asp-validation-for="Price" class="form-text text-danger"></span>
         </div>
@@ -28,8 +28,16 @@
             <span asp-validation-for="Rating" class="form-text text-danger"></span>
         </div>
         <div class="col-12 col-md-6 form-group">
+            <label asp-for="CategoryId">Category</label>
+            @* get pproperty from ViewData: @ViewData["categoryList"] as SelectList *@
+            @* get pproperty from ViewBag: @ViewBag.CategoryList *@
+            <select asp-for="CategoryId" asp-items="@ViewBag.CategoryList" class="form-control">
+                <option selected>--Without Category--</option>
+            </select>
+        </div>
+        <div class="col-12 form-group">
             <label asp-for="Description">Description</label>
-            <textarea asp-for="Description" class="form-control" rows="7" placeholder="Enter description"></textarea>
+            <textarea asp-for="Description" class="form-control" rows="4" placeholder="Enter description"></textarea>
             <span asp-validation-for="Description" class="form-text text-danger"></span>
         </div>
     </div>

@@ -1,6 +1,7 @@
 ﻿using Data;
 using Data.Entities;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -27,6 +28,14 @@ namespace FirstAspNetMvc_project.Controllers
         [HttpGet]
         public IActionResult Create()
         {
+            var categories = new SelectList(context.Categories.ToList(), nameof(Category.Id), nameof(Category.Name));
+
+            // 1 - using ViewData
+            //ViewData["categoryList"] = categories;
+
+            // 2 - using ViewBag
+            ViewBag.CategoryList = categories;
+
             return View("Upsert");
         }
 
@@ -52,6 +61,8 @@ namespace FirstAspNetMvc_project.Controllers
 
             if (product == null) return NotFound();
 
+            ViewBag.CategoryList = new SelectList(context.Categories.ToList(), nameof(Category.Id), nameof(Category.Name));
+            
             return View("Upsert", product);
         }
 
