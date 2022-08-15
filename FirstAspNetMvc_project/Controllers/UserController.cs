@@ -68,6 +68,7 @@ namespace FirstAspNetMvc_project.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [HttpGet]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id < 0) return NotFound();

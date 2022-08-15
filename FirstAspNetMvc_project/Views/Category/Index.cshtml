@@ -1,0 +1,32 @@
+﻿@model List<Data.Entities.Category>;
+
+<h1 class="mb-4">Category List</h1>
+
+<a asp-controller="Category" asp-action="Create" class="mb-3 btn btn-primary text-white">Create New Category</a>
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Name</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.Name</td>
+                <td class="text-right">
+                    <div class="btn-group" role="group">
+                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-info p-1 px-3">Edit</a>
+                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-outline-danger p-1 px-3">Delete</a>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<p class="my-2 text-center">Count: @Model.Count</p>

@@ -23,14 +23,14 @@ namespace Data.Data
         public static void SeedCategories(this ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Category>().HasData(
-               new Role() { Id = (int)Categories.Fashion, Name = "Fashion" },
-               new Role() { Id = (int)Categories.Electronics, Name = "Electronics" },
-               new Role() { Id = (int)Categories.Art, Name = "Art" },
-               new Role() { Id = (int)Categories.Musical, Name = "Musical" },
-               new Role() { Id = (int)Categories.HomeAndGarder, Name = "Home & Garder" },
-               new Role() { Id = (int)Categories.AutoParts, Name = "Auto Parts" },
-               new Role() { Id = (int)Categories.Sport, Name = "Sport" },
-               new Role() { Id = (int)Categories.ToysAndHobbies, Name = "Toys & Hobbies" }
+               new Category() { Id = (int)Categories.Fashion, Name = "Fashion" },
+               new Category() { Id = (int)Categories.Electronics, Name = "Electronics" },
+               new Category() { Id = (int)Categories.Art, Name = "Art" },
+               new Category() { Id = (int)Categories.Musical, Name = "Musical" },
+               new Category() { Id = (int)Categories.HomeAndGarder, Name = "Home & Garder" },
+               new Category() { Id = (int)Categories.AutoParts, Name = "Auto Parts" },
+               new Category() { Id = (int)Categories.Sport, Name = "Sport" },
+               new Category() { Id = (int)Categories.ToysAndHobbies, Name = "Toys & Hobbies" }
            );
         }
 
