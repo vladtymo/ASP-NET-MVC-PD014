@@ -1,4 +1,5 @@
 ﻿using FirstAspNetMvc_project.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -30,6 +31,8 @@ namespace FirstAspNetMvc_project.Controllers
 
         public IActionResult About()
         {
+            HttpContext.Session.SetString("Username", "blabla@ukr.net");
+
             return View();
         }
 

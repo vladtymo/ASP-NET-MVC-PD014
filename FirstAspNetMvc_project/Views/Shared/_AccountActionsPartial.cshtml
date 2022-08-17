@@ -1,0 +1,30 @@
+﻿@using Microsoft.AspNetCore.Http;
+@inject IHttpContextAccessor HttpContextAccessor;
+
+@{
+    string username = HttpContextAccessor.HttpContext.Session.GetString("Username");
+    bool isAuth = username != null;
+}
+
+@if(isAuth)
+{
+    <span>@username</span>
+}
+
+<ul class="navbar-nav flex-grow-1">
+    @if (!isAuth)
+    {
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-controller="" asp-action="Login">Login</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-controller="" asp-action="Register">Register</a>
+        </li>
+    }
+    else
+    {
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-controller="" asp-action="Logout">Logout</a>
+        </li>
+    }
+</ul>

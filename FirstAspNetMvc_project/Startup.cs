@@ -28,7 +28,17 @@ namespace FirstAspNetMvc_project
             services.AddControllersWithViews();
 
             services.AddDbContext<CompanyDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("CompanyDbConnection")));
+                options.UseSqlServer(Configuration.GetConnectionString("SomeeDb")));
+
+            services.AddDistributedMemoryCache();
+
+            services.AddHttpContextAccessor();
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromSeconds(10);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -50,6 +60,8 @@ namespace FirstAspNetMvc_project
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseSession();
 
             app.UseEndpoints(endpoints =>
             {
