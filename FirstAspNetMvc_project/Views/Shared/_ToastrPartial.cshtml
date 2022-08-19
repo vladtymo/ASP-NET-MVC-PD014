@@ -1,0 +1,21 @@
+﻿@using FirstAspNetMvc_project.Utilities;
+
+@{
+    ToastrData data = null;
+    if (TempData["ToastrData"] != null)
+        data = new ToastrData(TempData["ToastrData"] as string);
+}
+
+
+@if (data != null)
+{
+    <h1>Partial toasrt</h1>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/CodeSeven-toastr-50092cc/toastr.min.js"></script>
+
+    <script>
+
+        toastr["@data.Type"]("@data.Message", "@data.Title");
+    </script>
+}

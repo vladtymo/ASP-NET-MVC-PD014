@@ -11,6 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace FirstAspNetMvc_project.Controllers
@@ -64,6 +65,14 @@ namespace FirstAspNetMvc_project.Controllers
 
             context.Users.Add(data.User);
             await context.SaveChangesAsync();
+
+            // show alert
+            TempData["ToastrData"] = JsonSerializer.Serialize(new ToastrData()
+                {
+                    Message = "User was successfully created!",
+                    Title = "Created",
+                    Type = "success"
+                });
 
             return RedirectToAction(nameof(Index));
         }
