@@ -8,5 +8,6 @@ namespace FirstAspNetMvc_project.Utilities
     public static class WebConstants
     {
         public const string userAvatarsPath = "/avatars/";
+        public const string cartListKey = "cartProductList";
     }
 }

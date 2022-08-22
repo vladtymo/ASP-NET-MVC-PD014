@@ -1,0 +1,10 @@
+﻿@model Data.Entities.Product;
+
+<div class="card" style="width: 16rem;">
+    <img src="https://socialistmodernism.com/wp-content/uploads/2017/07/placeholder-image.png?w=640" class="card-img-top" alt="Product Image">
+    <div class="card-body">
+        <h5 class="card-title">@Model.Name</h5>
+        <p class="card-text">@Model.Price$</p>
+        <a asp-action="AddToCart" asp-route-productId="@Model.Id" class="btn btn-primary">Add to Cart</a>
+    </div>
+</div>

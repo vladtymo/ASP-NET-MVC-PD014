@@ -1,0 +1,22 @@
+﻿@model List<Data.Entities.Product>;
+
+<div class="card text-center">
+    <div class="card-header">
+        Cart
+    </div>
+    <div class="card-body">
+        <h5 class="card-title">Product List</h5>
+
+        <ul class="list-group">
+            @foreach (var item in Model)
+            {
+                <li class="list-group-item">@item.Name</li>
+            }
+        </ul>
+
+        <a href="#" class="btn btn-primary mt-3">Confirm</a>
+    </div>
+    <div class="card-footer text-muted">
+        Total Price: @Model.Sum(i => i.Price)$
+    </div>
+</div>

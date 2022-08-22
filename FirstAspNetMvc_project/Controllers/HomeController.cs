@@ -1,4 +1,6 @@
-﻿using FirstAspNetMvc_project.Models;
+﻿using Data;
+using FirstAspNetMvc_project.Models;
+using FirstAspNetMvc_project.Utilities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -13,15 +15,33 @@ namespace FirstAspNetMvc_project.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly CompanyDbContext context;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, CompanyDbContext context)
         {
             _logger = logger;
+            this.context = context;
         }
 
         public IActionResult Index()
         {
-            return View();
+            var products = context.Products.ToList();
+
+            return View(products);
+        }
+
+        public IActionResult AddToCart(int productId)
+        {
+            List<int> productIds = HttpContext.Session.Get<List<int>>(WebConstants.cartListKey);
+
+            if (productIds == null)
+                productIds = new List<int>();
+
+            productIds.Add(productId);
+
+            HttpContext.Session.Set<List<int>>(WebConstants.cartListKey, productIds);
+
+            return RedirectToAction(nameof(Index));
         }
 
         public IActionResult Privacy()

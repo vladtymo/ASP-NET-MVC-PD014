@@ -28,15 +28,16 @@ namespace FirstAspNetMvc_project
             services.AddControllersWithViews();
 
             services.AddDbContext<CompanyDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("SomeeDb")));
+                options.UseSqlServer(Configuration.GetConnectionString("CompanyDbConnection")));
 
             services.AddDistributedMemoryCache();
 
             services.AddHttpContextAccessor();
             services.AddSession(options =>
             {
+                options.Cookie.Name = ".Shop.Session";
                 options.IdleTimeout = TimeSpan.FromSeconds(10);
-                options.Cookie.HttpOnly = true;
+               
                 options.Cookie.IsEssential = true;
             });
         }
