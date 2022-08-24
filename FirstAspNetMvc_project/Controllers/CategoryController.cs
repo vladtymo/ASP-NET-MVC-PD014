@@ -1,5 +1,6 @@
 ﻿using Data;
 using Data.Entities;
+using Data.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -10,17 +11,19 @@ namespace FirstAspNetMvc_project.Controllers
 {
     public class CategoryController : Controller
     {
-        private readonly CompanyDbContext context;
+        private readonly IRepository<Category> categoryRepository;
+        //private readonly CompanyDbContext context;
 
         // Dependecy Injection
-        public CategoryController(CompanyDbContext context)
+        public CategoryController(IRepository<Category> categoryRepository)
         {
-            this.context = context;
+            this.categoryRepository = categoryRepository;
+            //this.context = context;
         }
 
         public IActionResult Index()
         {
-            return View(context.Categories.ToList());
+            return View(categoryRepository.GetAll());
         }
 
         [HttpGet]
@@ -37,15 +40,15 @@ namespace FirstAspNetMvc_project.Controllers
                 return View("Upsert");
             }
 
-            context.Categories.Add(newCategory);
-            context.SaveChanges();
+            categoryRepository.Insert(newCategory);
+            categoryRepository.Save();
 
             return RedirectToAction(nameof(Index));
         }
 
         public IActionResult Edit(int id)
         {
-            Category category = context.Categories.Find(id);
+            Category category = categoryRepository.GetById(id);
 
             if (category == null) return NotFound();
 
@@ -60,8 +63,8 @@ namespace FirstAspNetMvc_project.Controllers
                 return View("Upsert");
             }
 
-            context.Categories.Update(newCategory);
-            context.SaveChanges();
+            categoryRepository.Update(newCategory);
+            categoryRepository.Save();
 
             return RedirectToAction(nameof(Index));
         }
@@ -70,12 +73,12 @@ namespace FirstAspNetMvc_project.Controllers
         {
             if (id < 0) return NotFound();
 
-            var category = context.Categories.Find(id);
+            var category = categoryRepository.GetById(id);
 
             if (category == null) return NotFound();
 
-            context.Categories.Remove(category);
-            context.SaveChanges();
+            categoryRepository.Delete(id);
+            categoryRepository.Save();
 
             return RedirectToAction(nameof(Index));
         }

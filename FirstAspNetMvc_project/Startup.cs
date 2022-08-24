@@ -1,4 +1,5 @@
 using Data;
+using Data.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -29,6 +30,8 @@ namespace FirstAspNetMvc_project
 
             services.AddDbContext<CompanyDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("CompanyDbConnection")));
+
+            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 
             services.AddDistributedMemoryCache();
 
