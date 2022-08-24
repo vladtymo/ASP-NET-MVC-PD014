@@ -79,10 +79,5 @@ namespace Data.Repositories
             dbSet.Attach(entityToUpdate);
             context.Entry(entityToUpdate).State = EntityState.Modified;
         }
-
-        public int Save()
-        {
-            return context.SaveChanges();
-        }
     }
 }

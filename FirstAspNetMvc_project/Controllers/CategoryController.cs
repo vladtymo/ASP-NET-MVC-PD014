@@ -11,19 +11,21 @@ namespace FirstAspNetMvc_project.Controllers
 {
     public class CategoryController : Controller
     {
-        private readonly IRepository<Category> categoryRepository;
+        private readonly IUnitOfWork unitOfWork;
+        //private readonly IRepository<Category> categoryRepository;
         //private readonly CompanyDbContext context;
 
         // Dependecy Injection
-        public CategoryController(IRepository<Category> categoryRepository)
+        public CategoryController(IUnitOfWork unitOfWork)
         {
-            this.categoryRepository = categoryRepository;
+            this.unitOfWork = unitOfWork;
+            //this.categoryRepository = categoryRepository;
             //this.context = context;
         }
 
         public IActionResult Index()
         {
-            return View(categoryRepository.GetAll());
+            return View(unitOfWork.CategoryRepository.GetAll());
         }
 
         [HttpGet]
@@ -40,15 +42,15 @@ namespace FirstAspNetMvc_project.Controllers
                 return View("Upsert");
             }
 
-            categoryRepository.Insert(newCategory);
-            categoryRepository.Save();
+            unitOfWork.CategoryRepository.Insert(newCategory);
+            unitOfWork.Save();
 
             return RedirectToAction(nameof(Index));
         }
 
         public IActionResult Edit(int id)
         {
-            Category category = categoryRepository.GetById(id);
+            Category category = unitOfWork.CategoryRepository.GetById(id);
 
             if (category == null) return NotFound();
 
@@ -63,8 +65,8 @@ namespace FirstAspNetMvc_project.Controllers
                 return View("Upsert");
             }
 
-            categoryRepository.Update(newCategory);
-            categoryRepository.Save();
+            unitOfWork.CategoryRepository.Update(newCategory);
+            unitOfWork.Save();
 
             return RedirectToAction(nameof(Index));
         }
@@ -73,12 +75,12 @@ namespace FirstAspNetMvc_project.Controllers
         {
             if (id < 0) return NotFound();
 
-            var category = categoryRepository.GetById(id);
+            var category = unitOfWork.CategoryRepository.GetById(id);
 
             if (category == null) return NotFound();
 
-            categoryRepository.Delete(id);
-            categoryRepository.Save();
+            unitOfWork.CategoryRepository.Delete(id);
+            unitOfWork.Save();
 
             return RedirectToAction(nameof(Index));
         }

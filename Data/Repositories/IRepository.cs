@@ -17,6 +17,5 @@ namespace Data.Repositories
         void Delete(int id);
         void Delete(TEntity entityToDelete);
         void Update(TEntity entityToUpdate);
-        int Save();
     }
 }

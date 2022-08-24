@@ -31,7 +31,10 @@ namespace FirstAspNetMvc_project
             services.AddDbContext<CompanyDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("CompanyDbConnection")));
 
-            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+            //services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+            
+            //services.AddScoped(typeof(IUnitOfWork), typeof(UnitOfWork));
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             services.AddDistributedMemoryCache();
 
