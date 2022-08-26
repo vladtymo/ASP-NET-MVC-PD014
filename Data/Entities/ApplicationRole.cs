@@ -10,12 +10,12 @@ namespace Data.Entities
         Moderator,
         Administrator
     }
-    public class Role
+    public class ApplicationRole
     {
         public int Id { get; set; }
         [Required, MaxLength(100)]
         public string Name { get; set; }
 
-        public virtual ICollection<User> Users { get; set; }
+        public virtual ICollection<ApplicationUser> Users { get; set; }
     }
 }

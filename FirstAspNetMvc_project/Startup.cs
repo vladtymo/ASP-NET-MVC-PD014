@@ -1,4 +1,5 @@
 using Data;
+using Data.Entities;
 using Data.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -31,8 +32,11 @@ namespace FirstAspNetMvc_project
             services.AddDbContext<CompanyDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("CompanyDbConnection")));
 
+            services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
+                   .AddEntityFrameworkStores<CompanyDbContext>();
+
             //services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
-            
+
             //services.AddScoped(typeof(IUnitOfWork), typeof(UnitOfWork));
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
@@ -66,6 +70,7 @@ namespace FirstAspNetMvc_project
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseSession();
@@ -75,6 +80,8 @@ namespace FirstAspNetMvc_project
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+                endpoints.MapRazorPages();
             });
         }
     }

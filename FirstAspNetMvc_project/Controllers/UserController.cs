@@ -31,13 +31,13 @@ namespace FirstAspNetMvc_project.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            return View(context.Users.ToList());
+            return View(context.ApplicationUsers.ToList());
         }
 
         [HttpGet]
         public IActionResult Create()
         {
-            var roles = new SelectList(context.Roles.ToList(), nameof(Role.Id), nameof(Role.Name));
+            var roles = new SelectList(context.ApplicationRoles.ToList(), nameof(ApplicationRole.Id), nameof(ApplicationRole.Name));
             var viewModel = new CreateUserViewModel()
             {
                 Roles = roles
@@ -63,7 +63,7 @@ namespace FirstAspNetMvc_project.Controllers
                 data.User.Avatar = avatarPath;
             }
 
-            context.Users.Add(data.User);
+            context.ApplicationUsers.Add(data.User);
             await context.SaveChangesAsync();
 
             // show alert
@@ -82,11 +82,11 @@ namespace FirstAspNetMvc_project.Controllers
         {
             if (id < 0) return NotFound();
 
-            var user = await context.Users.FindAsync(id);
+            var user = await context.ApplicationUsers.FindAsync(id);
 
             if (user == null) return NotFound();
 
-            var roles = new SelectList(context.Roles.ToList(), nameof(Role.Id), nameof(Role.Name));
+            var roles = new SelectList(context.ApplicationRoles.ToList(), nameof(ApplicationRole.Id), nameof(ApplicationRole.Name));
             var viewModel = new EditUserViewModel()
             {
                 Roles = roles,
@@ -104,12 +104,12 @@ namespace FirstAspNetMvc_project.Controllers
                 return View(data);
             }
 
-            var user = context.Users.AsNoTracking().FirstOrDefault(u => u.Id == data.User.Id);
+            var user = context.ApplicationUsers.AsNoTracking().FirstOrDefault(u => u.Id == data.User.Id);
             //var user = await context.Users.FindAsync(updatedUser.Id);
 
             if (user == null) return NotFound();
 
-            context.Users.Update(data.User);
+            context.ApplicationUsers.Update(data.User);
             context.SaveChanges();
 
             return RedirectToAction(nameof(Index));
@@ -119,11 +119,11 @@ namespace FirstAspNetMvc_project.Controllers
         {   
             if (id < 0) return NotFound();
 
-            var user = await context.Users.FindAsync(id);
+            var user = await context.ApplicationUsers.FindAsync(id);
 
             if (user == null) return NotFound();
 
-            context.Users.Remove(user);
+            context.ApplicationUsers.Remove(user);
             await context.SaveChangesAsync();
 
             return RedirectToAction(nameof(Index));

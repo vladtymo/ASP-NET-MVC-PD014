@@ -1,5 +1,6 @@
 ﻿using Data.Data;
 using Data.Entities;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Data
 {
-    public class CompanyDbContext : DbContext
+    public class CompanyDbContext : IdentityDbContext<ApplicationUser>
     {
         public CompanyDbContext(DbContextOptions options) : base(options)
         {
@@ -33,9 +34,9 @@ namespace Data
             modelBuilder.SeedProducts();
         }
 
-        public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<ApplicationUser> ApplicationUsers { get; set; }
         public virtual DbSet<Product> Products { get; set; }
-        public virtual DbSet<Role> Roles { get; set; }
+        public virtual DbSet<ApplicationRole> ApplicationRoles { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
     }
 }

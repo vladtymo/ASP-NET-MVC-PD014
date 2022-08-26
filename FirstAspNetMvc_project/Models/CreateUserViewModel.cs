@@ -9,7 +9,7 @@ namespace FirstAspNetMvc_project.Models
 {
     public class CreateUserViewModel
     {
-        public User User { get; set; }
+        public ApplicationUser User { get; set; }
         public SelectList Roles { get; set; }
     }
 }

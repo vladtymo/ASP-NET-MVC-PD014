@@ -12,11 +12,11 @@ namespace Data.Data
     {
         public static void SeedRoles(this ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Role>().HasData(
-                new Role() { Id = (int)Roles.User, Name = "User" },
-                new Role() { Id = (int)Roles.Manager, Name = "Manager" },
-                new Role() { Id = (int)Roles.Moderator, Name = "Moderator" },
-                new Role() { Id = (int)Roles.Administrator, Name = "Administrator" }
+            modelBuilder.Entity<ApplicationRole>().HasData(
+                new ApplicationRole() { Id = (int)Roles.User, Name = "User" },
+                new ApplicationRole() { Id = (int)Roles.Manager, Name = "Manager" },
+                new ApplicationRole() { Id = (int)Roles.Moderator, Name = "Moderator" },
+                new ApplicationRole() { Id = (int)Roles.Administrator, Name = "Administrator" }
             );
         }
 
@@ -36,18 +36,17 @@ namespace Data.Data
 
         public static void SeedUsers(this ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<User>().HasData(
-                new User()
+            modelBuilder.Entity<ApplicationUser>().HasData(
+                new ApplicationUser()
                 {
-                    Id = 1,
                     Name = "Vlad",
                     Surname = "Tymo",
                     Email = "rejv434@gmail.com",
                     BirthDate = DateTime.Now,
                     RoleId = (int)Roles.Moderator
                 },
-                new User() { Id = 2, Name = "Bob", Surname = "Bobovich", Email = "super4344@gmail.com", BirthDate = DateTime.Now },
-                new User() { Id = 3, Name = "Igor", Surname = "Rufer", Email = "hgkkkkff@gmail.com", BirthDate = DateTime.Now }
+                new ApplicationUser() { Name = "Bob", Surname = "Bobovich", Email = "super4344@gmail.com", BirthDate = DateTime.Now },
+                new ApplicationUser() { Name = "Igor", Surname = "Rufer", Email = "hgkkkkff@gmail.com", BirthDate = DateTime.Now }
             );
         }
 
