@@ -1,17 +1,14 @@
 using Data;
 using Data.Entities;
 using Data.Repositories;
+using FirstAspNetMvc_project.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace FirstAspNetMvc_project
 {
@@ -35,10 +32,12 @@ namespace FirstAspNetMvc_project
             services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
                    .AddEntityFrameworkStores<CompanyDbContext>();
 
+            services.AddTransient<IEmailService, EmailService>();
             //services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
-
             //services.AddScoped(typeof(IUnitOfWork), typeof(UnitOfWork));
             services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+            //services.AddAuthentication(IISDefaults.AuthenticationScheme);
 
             services.AddDistributedMemoryCache();
 

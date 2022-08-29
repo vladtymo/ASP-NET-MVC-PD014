@@ -14,7 +14,7 @@
             }
         </ul>
 
-        <a href="#" class="btn btn-primary mt-3">Confirm</a>
+        <a asp-action="Confirm" class="btn btn-primary mt-3">Confirm</a>
     </div>
     <div class="card-footer text-muted">
         Total Price: @Model.Sum(i => i.Price)$

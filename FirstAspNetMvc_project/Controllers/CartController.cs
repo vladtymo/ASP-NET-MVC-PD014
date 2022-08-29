@@ -1,21 +1,22 @@
 ﻿using Data;
 using Data.Entities;
+using FirstAspNetMvc_project.Services;
 using FirstAspNetMvc_project.Utilities;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace FirstAspNetMvc_project.Controllers
 {
     public class CartController : Controller
     {
         private readonly CompanyDbContext context;
+        private readonly IEmailService emailService;
 
-        public CartController(CompanyDbContext context)
+        public CartController(CompanyDbContext context, IEmailService emailService)
         {
             this.context = context;
+            this.emailService = emailService;
         }
 
         public IActionResult Index()
@@ -30,6 +31,12 @@ namespace FirstAspNetMvc_project.Controllers
             return View(products);
         }
 
-        
+        public IActionResult Confirm()
+        {
+            string userEmail = User.Identity.Name;
+            emailService.SendAsync(userEmail, "ASP.NET Shop", @"<h1>Hello from App!</h1>");
+
+            return RedirectToAction(nameof(Index));
+        }
     }
 }
